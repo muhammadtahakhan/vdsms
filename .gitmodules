@@ -1,0 +1,3 @@
+[submodule "vdsms"]
+	path = vdsms
+	url = https://github.com/muhammadtahakhan/vdsms.git
