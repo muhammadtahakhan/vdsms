@@ -702,7 +702,7 @@ class Admin extends CI_Controller
              foreach ($dues as $duess){
              $dats['amount']= $value[$i];
              $dats['student_id'] = $param2;
-             $dats['s_dues_id'] = $data2;
+             $dats['sys_dues_id'] = $s_dues['sys_dues_id'];
              $dats['created'] = date('Y-m-d');
              $this->db->insert('student_payments', $dats);
              }

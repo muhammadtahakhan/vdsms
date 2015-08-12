@@ -15,7 +15,7 @@ $student_info=$this->crud_model->get_student_info($param2);
                 <table  class="table table-bordered datatable" id="table_export">
                 	<thead>
                 		<tr>
-                    		<th><div><?php echo get_phrase('student');?></div></th>
+                    		<th><div><?php echo get_phrase('title');?></div></th>
                     		<th><div><?php echo get_phrase('amount');?></div></th>
                     		<th><div><?php echo get_phrase('date');?></div></th>
                     		</tr>
@@ -23,7 +23,7 @@ $student_info=$this->crud_model->get_student_info($param2);
                     <tbody>
                     	<?php foreach($edit_data as $row): ?>
                        <tr> 
-							<td><?php echo $this->crud_model->get_type_name_by_id('student',$row['student_id']);?></td>
+							<td><?php echo $this->crud_model->get_title_by_id('sys_dues',$row['sys_dues_id']);?></td>
 							<td><?php echo $row['amount'];?></td>
 							<td><?php echo $row['created']?></td>
 							
@@ -143,7 +143,7 @@ $edit_data=$this->db->get_where('student_dues' , array('student_id' => $param2, 
 $this->db->where(['student_id'=>$param2, 'status'=>0]);
 $this->db->from('student_dues');
 $test=$this->db->count_all_results();
-if($test == 1){
+if($test >= 1){
 
         ?>
                 
