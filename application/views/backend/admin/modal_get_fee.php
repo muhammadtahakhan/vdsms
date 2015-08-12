@@ -137,13 +137,22 @@ $edit_data=$this->db->get_where('student_dues' , array('student_id' => $param2, 
             </div><!-- /input-group -->
          </div>
       
-        <?php endforeach;?>
+        <?php endforeach;
+        
+
+$this->db->where(['student_id'=>$param2, 'status'=>0]);
+$this->db->from('student_dues');
+$test=$this->db->count_all_results();
+if($test == 1){
+
+        ?>
                 
                 
               
                 <div class="col-lg-12">
                     <input class="pull-right" type="submit" name="submit" Value="Submit"/>
-                 </div>
+</div>
+    <?php } ?>
   </ul>
     </form>
     </div>
