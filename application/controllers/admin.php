@@ -686,26 +686,28 @@ class Admin extends CI_Controller
         if ($param1 == 'get_fee') {
         
           $dataa         = $this->input->post('fee');
+          $value         = $this->input->post('value');
+         
           
           foreach($dataa as $data1):
               $data['status']=1;
               $this->db->where('id', $data1);
               $this->db->update('student_dues', $data); 
           endforeach;
-               
+           $i=0;             
           foreach($dataa as $data2):
              
             $s_dues = $this->db->get_where('student_dues', array('id'=>$data2))->row_array();
-            $dues = $this->db->get_where('sys_dues', array('id'=>$s_dues['sys_dues_id']))->result_array();
+            $dues = $this->db->get_where('sys_dues', array('sys_dues_id'=>$s_dues['sys_dues_id']))->result_array();
              foreach ($dues as $duess){
-             $dats['amount']= $duess['amount'];
-             $dats['s_id'] = $param3;
+             $dats['amount']= $value[$i];
+             $dats['student_id'] = $param2;
              $dats['s_dues_id'] = $data2;
              $dats['created'] = date('Y-m-d');
              $this->db->insert('student_payments', $dats);
              }
-             
-            endforeach;
+             $i++;
+          endforeach;
             
                redirect(base_url() . 'index.php?admin/invoice', 'refresh');
            }
