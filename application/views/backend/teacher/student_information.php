@@ -52,7 +52,7 @@
                         <li class="divider"></li>-->
                         
                         <!-- STUDENT DELETION LINK -->
-<!--                        <li>
+<!--hrllo                        <li>
                             <a href="#" onclick="confirm_modal('<?php // echo base_url();?>index.php?teacher/student/<?php echo $class_id;?>/delete/<?php echo $row['student_id'];?>');">
                                 <i class="entypo-trash"></i>
                                     <?php// echo get_phrase('delete');?>
