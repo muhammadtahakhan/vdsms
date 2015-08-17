@@ -644,17 +644,17 @@ class Admin extends CI_Controller
            $data['student_id']          = $this->input->post('student_id');
             $data['title']              = $this->input->post('title');
             $data['description']        = $this->input->post('description');
-            $data['add_fee']            = $this->input->post('add_fee');
-            $data['security_fee']       = $this->input->post('security_fee');
-            $data['tuition_fee']        = $this->input->post('tuition_fee');
-            $data['annual_fee']         = $this->input->post('annual_fee');
-            $data['stationary_fee']     = $this->input->post('stationary_fee');
-            $data['multimedia_fee']     = $this->input->post('multimedia_fee');
-            $data['others']             = $this->input->post('others');
+           // $data['add_fee']            = $this->input->post('add_fee');
+          //  $data['security_fee']       = $this->input->post('security_fee');
+         //   $data['tuition_fee']        = $this->input->post('tuition_fee');
+          //  $data['annual_fee']         = $this->input->post('annual_fee');
+           // $data['stationary_fee']     = $this->input->post('stationary_fee');
+          //  $data['multimedia_fee']     = $this->input->post('multimedia_fee');
+          //  $data['others']             = $this->input->post('others');
             $data['amount']             = $this->input->post('amount');
             $data['status']             = $this->input->post('status');
             $data['creation_timestamp'] = strtotime($this->input->post('date'));
-            $data['due_date'] = date('Y-m-d',strtotime($this->input->post('due_date')));
+        //    $data['due_date'] = date('Y-m-d',strtotime($this->input->post('due_date')));
             
             
             $this->db->insert('invoice', $data);

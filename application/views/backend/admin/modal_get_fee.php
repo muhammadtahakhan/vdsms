@@ -133,7 +133,7 @@ $edit_data=$this->db->get_where('student_dues' , array('student_id' => $param2, 
                <span class="input-group-addon">
                    <input type="checkbox" name="fee[]" value="<?= $row['id'] ?>" onclick="myFunction(<?= $row['id'] ?>)" >
                </span>
-                     <input id="<?= $row['id'] ?>" value="<?php echo$row['fee']; ?>" type="number" name="value[]" class="form-control" disabled>
+                     <input  id="<?= $row['id'] ?>" value="<?php echo$row['fee']; ?>" onchange="mycheck(    )" type="number" name="value[]" class="form-control" disabled>
             </div><!-- /input-group -->
          </div>
       
@@ -157,10 +157,20 @@ if($test >= 1){
     </form>
     </div>
 
+<p id="demo"></p>
 </div>
 </header>
 
 <script>
+    function mycheck() {
+        alert('hello');
+//    var inpObj = document.getElementById("id1");
+//    if (inpObj.checkValidity() == false) {
+//        document.getElementById("demo").innerHTML = inpObj.validationMessage;
+//    } else {
+//        document.getElementById("demo").innerHTML = "Input OK";
+    } 
+} 
 function myFunction(id) {
     var x = document.getElementById(id);
 
