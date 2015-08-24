@@ -20,7 +20,10 @@ class Crud_model extends CI_Model {
 	{
               return	$this->db->get_where($type,array($type.'_id'=>$type_id))->row()->$field;	
 	}
-	
+	function get_class_by_id($type,$type_id='',$field='class_id')
+	{
+              return	$this->db->get_where($type,array($type.'_id'=>$type_id))->row()->$field;	
+	}
 	////////STUDENT/////////////
 	function get_students($class_id)
 	{
