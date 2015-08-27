@@ -640,6 +640,24 @@ class Admin extends CI_Controller
             redirect(base_url() . 'index.php?admin/invoice', 'refresh');
         }
         
+        
+        if ($param1 == 'delete_fee') {
+            
+            $id = $_POST['student_dues_id'];
+            $data['status']=0;
+            $this->db->where('student_dues_id', $id);
+            $this->db->update('student_dues', $data); 
+            
+            $this->db->where('id', $param3);
+            $this->db->delete('student_payments');
+            
+            echo "delete_fee";
+            $class_id = $this->crud_model->get_class_by_id('student',$param2);
+            echo $param2;
+            redirect(base_url() . 'index.php?admin/student_invoice/'.$class_id, 'refresh');
+            
+        }
+        
         if ($param1 == 'create') {
            $data['student_id']          = $this->input->post('student_id');
             $data['title']              = $this->input->post('title');
@@ -691,16 +709,17 @@ class Admin extends CI_Controller
           
           foreach($dataa as $data1):
               $data['status']=1;
-              $this->db->where('id', $data1);
+              $this->db->where('student_dues_id', $data1);
               $this->db->update('student_dues', $data); 
           endforeach;
            $i=0;             
           foreach($dataa as $data2):
              
-            $s_dues = $this->db->get_where('student_dues', array('id'=>$data2))->row_array();
+            $s_dues = $this->db->get_where('student_dues', array('student_dues_id'=>$data2))->row_array();
             $dues = $this->db->get_where('sys_dues', array('sys_dues_id'=>$s_dues['sys_dues_id']))->result_array();
              foreach ($dues as $duess){
              $dats['amount']= $value[$i];
+             $dats['student_dues_id']= $data2;
              $dats['student_id'] = $param2;
              $dats['sys_dues_id'] = $s_dues['sys_dues_id'];
              $dats['created'] = date('Y-m-d');

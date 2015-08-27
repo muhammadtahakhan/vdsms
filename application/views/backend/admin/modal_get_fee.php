@@ -21,18 +21,25 @@ $student_info=$this->crud_model->get_student_info($param2);
                     		<th><div><?php echo get_phrase('title');?></div></th>
                     		<th><div><?php echo get_phrase('amount');?></div></th>
                     		<th><div><?php echo get_phrase('date');?></div></th>
+                                <th><div><?php echo get_phrase('remove');?></div></th>
                     		</tr>
 					</thead>
                     <tbody>
-                    	<?php foreach($edit_data as $row): ?>
-                       <tr> 
-							<td><?php echo $this->crud_model->get_title_by_id('sys_dues',$row['sys_dues_id']);?></td>
-							<td><?php echo $row['amount'];?></td>
-							<td><?php echo $row['created']?></td>
-							
+                    	<?php foreach($edit_data as $row){ ?>
+                    
+		        <tr> 
+                        	<td><?php echo $this->crud_model->get_title_by_id('sys_dues',$row['sys_dues_id']);?></td>
+				<td><?php echo $row['amount'];?></td>
+				<td><?php echo $row['created']?></td>
+                                <td><?php echo form_open('admin/invoice/delete_fee/'.$row['student_id'].'/'.$row['id'], array('class' => 'form-horizontal form-groups-bordered validate','target'=>'_top')); ?>
+ <button type="submit" href="#" onclick="if(confirm('realy want to delete?'))submit(this);else  return false"><span class="glyphicon glyphicon-remove"></span></button>
+ <input style="display:none" type="text" name="student_dues_id" value="<?= $row['student_dues_id'] ?>" />    
+                                <?= "</form>" ?>
+                                </td>
+                                   		
                         </tr>
-                      
-                       <?php endforeach;?>
+                   
+                        <?php };?>
                     </tbody>
                 </table>
 			</div>
@@ -106,9 +113,9 @@ $edit_data=$this->db->get_where('student_dues' , array('student_id' => $param2, 
                  
                  <div class="input-group">
                <span class="input-group-addon">
-                   <input type="checkbox" name="fee[]" value="<?= $row['id'] ?>" onclick="myFunction(<?= $row['id'] ?>)" >
+                   <input type="checkbox" name="fee[]" value="<?= $row['student_dues_id'] ?>" onclick="myFunction(<?= $row['student_dues_id'] ?>)" >
                </span>
-                     <input disabled  onchange="value_amount()"  id="<?= $row['id'] ?>" value="<?php echo$row['fee']; ?>"  type="number" name="value[]" class="form-control amount_select" >
+                     <input disabled onkeyup="value_amount()"  id="<?= $row['student_dues_id'] ?>" value="<?php echo$row['fee']; ?>"  type="number" name="value[]" class="form-control amount_select" >
             </div><!-- /input-group -->
               </div>
       
