@@ -42,6 +42,27 @@ class Admin extends CI_Controller
         $page_data['page_title'] = get_phrase('admin_dashboard');
         $this->load->view('backend/index', $page_data);
     }
+     
+    /***ADMIN DASHBOARD***/
+    function notification($param1 = '', $param2 = '', $param3 = '')
+    {
+       if ($this->session->userdata('admin_login') != 1)
+            redirect(base_url(), 'refresh');
+       
+        if ($param1 == 'delete') {
+            $data = ['status'=>0];
+            $this->db->where('notification_id', $param2);
+            $this->db->update('notification', $data); 
+            redirect(base_url() . 'index.php?admin/notification/', 'refresh');
+        }
+        
+        $page_data['page_name']  = 'notification';
+        $page_data['page_title'] = get_phrase('notification');
+         $page_data['query'] = $this->db->get_where('notification', ['status'=>1])->result_array();
+//        print_r($query);
+        $this->load->view('backend/index', $page_data, $query);
+      
+    }
     
     
     /****MANAGE STUDENTS CLASSWISE*****/

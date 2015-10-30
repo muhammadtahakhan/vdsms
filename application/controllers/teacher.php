@@ -97,7 +97,7 @@ class Teacher extends CI_Controller
             redirect('login', 'refresh');
 			
 		$page_data['page_name']  = 'student_marksheet';
-		$page_data['page_title'] 	= get_phrase('student_marksheet'). " - ".get_phrase('class')." : ".
+		$page_data['page_title'] = get_phrase('student_marksheet'). " - ".get_phrase('class')." : ".
 											$this->crud_model->get_class_name($class_id);
 		$page_data['class_id'] 	= $class_id;
 		$this->load->view('backend/index', $page_data);
@@ -119,9 +119,17 @@ class Teacher extends CI_Controller
             $data['roll']        = $this->input->post('roll');
             $this->db->insert('student', $data);
             $student_id = mysql_insert_id();
+            $datan['message'] = "New Student ".$data['roll']." Inserted by teacher: ". $this->session->userdata('name');
+            $datan['date']  = date('Y-m-d');
+            $datan['is_read']  = 0;
+            $datan['name']  = strtoupper($this->session->userdata('name'));
+            $datan['action']  = 'create';
+            $datan['status']  = 1;
+            $this->db->insert('notification', $datan);
             move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/student_image/' . $student_id . '.jpg');
             $this->email_model->account_opening_email('student', $data['email']); //SEND EMAIL ACCOUNT OPENING EMAIL
-            redirect(base_url() . 'index.php?teacher/student_add/' . $data['class_id'], 'refresh');
+//            redirect(base_url() . 'index.php?teacher/student_add/' . $data['class_id'], 'refresh');
+             redirect(base_url() . 'index.php?teacher/student_information/' . $data['class_id'], 'refresh');
         }
         if ($param2 == 'do_update') {
             $data['name']        = $this->input->post('name');
@@ -135,6 +143,9 @@ class Teacher extends CI_Controller
             
             $this->db->where('student_id', $param3);
             $this->db->update('student', $data);
+            $datan['message'] = "Student ".$data['roll']." Updated by teacher: ". $this->session->userdata('name');
+            $datan['status']  = 1;
+            $this->db->insert('notification', $datan);
             move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/student_image/' . $param3 . '.jpg');
             $this->crud_model->clear_cache();
             
@@ -144,6 +155,9 @@ class Teacher extends CI_Controller
         if ($param2 == 'delete') {
             $this->db->where('student_id', $param3);
             $this->db->delete('student');
+            $datan['message'] = "Student ".$param3." Deleted by teacher: ". $this->session->userdata('name');
+            $datan['status']  = 1;
+            $this->db->insert('notification', $datan);
             redirect(base_url() . 'index.php?teacher/student_information/' . $param1, 'refresh');
         }
     }

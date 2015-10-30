@@ -24,6 +24,17 @@
     
 	<div class="col-md-4">
 		<div class="row">
+                    <a href="<?php echo site_url('admin/notification') ?>">   <div class="col-md-12">
+            
+                <div class="tile-stats tile-white-cyan">
+                    <div class="icon"><i class="fa fa-gears"></i></div>
+                    <div class="num" data-start="0" data-end="<?php echo $this->db->where('is_read',0)->from('notification')->count_all_results();?>" data-postfix="" data-duration="500" data-delay="0">0</div>
+
+                    <h3><?php echo get_phrase('notification');?></h3>
+                   <p>Total unread notifications</p>
+                </div>
+                
+                        </div></a>
             <div class="col-md-12">
             
                 <div class="tile-stats tile-red">
@@ -36,6 +47,7 @@
                 </div>
                 
             </div>
+                    
             <div class="col-md-12">
             
                 <div class="tile-stats tile-green">
@@ -48,6 +60,7 @@
                 </div>
                 
             </div>
+                    
             <div class="col-md-12">
             
                 <div class="tile-stats tile-aqua">

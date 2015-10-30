@@ -115,7 +115,7 @@ $edit_data=$this->db->get_where('student_dues' , array('student_id' => $param2, 
                <span class="input-group-addon">
                    <input type="checkbox" name="fee[]" value="<?= $row['student_dues_id'] ?>" onclick="myFunction(<?= $row['student_dues_id'] ?>)" >
                </span>
-                     <input disabled onkeyup="value_amount()"  id="<?= $row['student_dues_id'] ?>" value="<?php echo$row['fee']; ?>"  type="number" name="value[]" class="form-control amount_select" >
+                     <input disabled onchange="value_amount()" onkeyup="value_amount()"  id="<?= $row['student_dues_id'] ?>" value="<?php echo$row['fee']; ?>"  type="number" name="value[]" class="form-control amount_select" >
             </div><!-- /input-group -->
               </div>
       
